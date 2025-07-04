@@ -21,12 +21,12 @@ const student1: Student = {
 const studentsList: Student[] = [student1, student2];
 
 function table(students: Student[]): void {
-  const table = document.createElement("table");
-  const header = document.createElement("tr");
+  const table: HTMLElement = document.createElement("table");
+  const header: HTMLElement = document.createElement("tr");
 
-  const nameHeader = document.createElement("th");
+  const nameHeader: HTMLElement = document.createElement("th");
   nameHeader.textContent = "First name";
-  const locationHeader = document.createElement("th");
+  const locationHeader: HTMLElement = document.createElement("th");
   locationHeader.textContent = "Location";
 
   header.appendChild(nameHeader);

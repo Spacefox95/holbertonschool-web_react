@@ -1,10 +1,12 @@
 import './Notifications.css'
 
 
-export default function Notifications() {
+const Notifications = () => {
 	return (
 		<div className="notifications">
 			<p>Here is the list of notifications</p>
 		</div>
 	);
 }
+
+export default Notifications;

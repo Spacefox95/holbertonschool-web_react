@@ -6,7 +6,8 @@ import { getCurrentYear, getFooterCopy } from "./utils";
 function App() {
   return (
     <>
-    <Notifications />
+      <div className="root-notifications">
+        <Notifications /></div>
       <div className="App-header">
         <img src={logo} alt="holberton logo" />
         <h1 style={{ color: "#e1003c" }}>School dashboard</h1>

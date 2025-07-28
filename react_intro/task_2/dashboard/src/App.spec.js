@@ -41,7 +41,7 @@ describe("App component", () => {
 
   test("render a button with text 'OK'", () => {
     render(<App />);
-    const button = screen.getByRole("button", { name: /ok/i });
+    const button = screen.getByRole("button", { name: /OK/i });
     expect(button).toBeInTheDocument();
   });
 });

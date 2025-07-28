@@ -23,7 +23,7 @@ function App() {
         <label for="password">Password </label>
         <input type="password" id="password" name="password" />
 
-        <button>OK</button>
+        <button type="submit">OK</button>
       </div>
 
       <div className="App-footer">

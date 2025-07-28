@@ -1,16 +1,9 @@
-import { useEffect } from "react";
 import "./App.css";
 import Notifications from "./Notifications.jsx";
 import logo from "./assets/holberton-logo.jpg";
 import { getCurrentYear, getFooterCopy } from "./utils";
 
 function App() {
-
-  const emailRef = useRef(null);
-
-  useEffect(() => {
-    emailRef.current.focus();
-  }, [])
   return (
     <>
       <div className="root-notifications">
@@ -24,10 +17,10 @@ function App() {
       <div className="App-body">
         <p>Login to access the full dashboard</p>
 
-        <label htmlFor="email">E-mail </label>
-        <input type="email" id="email" name="email" ref={emailRef}/>
+        <label for="email">E-mail </label>
+        <input type="email" id="email" name="email" />
 
-        <label htmlFor="password">Password </label>
+        <label for="password">Password </label>
         <input type="password" id="password" name="password" />
 
         <button>OK</button>

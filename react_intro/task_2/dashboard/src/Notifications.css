@@ -1,0 +1,7 @@
+.notifications {
+	display:  flex;
+	border: dotted 2px #e1003c ;
+	padding-left: 15px;
+	height: 40px;
+	align-items: center;
+}

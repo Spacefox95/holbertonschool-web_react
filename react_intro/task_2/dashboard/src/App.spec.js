@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, describe, test, expect } from "@testing-library/react";
 import App from "./App";
 
 describe("App component", () => {

@@ -1,9 +1,12 @@
 import "./App.css";
+import { useRef } from "react";
 import Notifications from "./Notifications.jsx";
 import logo from "./assets/holberton-logo.jpg";
 import { getCurrentYear, getFooterCopy } from "./utils";
 
 function App() {
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
   return (
     <>
       <div className="root-notifications">
@@ -18,11 +21,26 @@ function App() {
         <p>Login to access the full dashboard</p>
 
         <form>
-          <label for="email">Email: </label>
-          <input type="email" id="email" name="email" />
+          <label
+            htmlFor="email"
+            onClick={() => emailRef.current && emailRef.current.focus()}
+          >
+            Email:{" "}
+          </label>
+          <input type="email" id="email" name="email" ref={emailRef} />
 
-          <label for="password">Password: </label>
-          <input type="password" id="password" name="password" />
+          <label
+            htmlFor="password"
+            onClick={() => passwordRef.current && passwordRef.current.focus()}
+          >
+            Password:{" "}
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            ref={passwordRef}
+          />
 
           <button type="submit">OK</button>
         </form>

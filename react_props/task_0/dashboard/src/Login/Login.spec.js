@@ -1,5 +1,5 @@
 import Login from "./Login";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 
 describe("Login component", () => {
   test("renders two input elements", () => {
@@ -22,5 +22,20 @@ describe("Login component", () => {
     render(<Login />);
     const button = screen.getByRole("button", { name: /ok/i });
     expect(button).toBeInTheDocument();
+  });
+
+  test("renders 2 labels, 2 inputs, and 1 button", () => {
+    render(<Login />);
+    expect(screen.getAllByLabelText(/email|password/i)).toHaveLength(2);
+    expect(screen.getAllByRole("textbox")).toHaveLength(1); // Email is a text box
+    expect(screen.getAllByLabelText(/password/i)[0].type).toBe("password");
+    expect(screen.getByRole("button", { name: /ok/i })).toBeInTheDocument();
+  });
+
+  test("focuses input when label is clicked", () => {
+    render(<Login />);
+    const emailInput = screen.getByLabelText(/email/i);
+    fireEvent.click(screen.getByText(/email/i));
+    expect(document.activeElement).toBe(emailInput);
   });
 });

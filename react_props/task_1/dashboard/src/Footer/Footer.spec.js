@@ -1,7 +1,14 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import {
+  render,
+  screen,
+  describe,
+  test,
+  expect,
+  jest,
+} from "@testing-library/react";
 import Footer from "./Footer";
-import * as utils from "../utils";
+import * as utils from "../utils/utils";
 
 describe("Footer component", () => {
   test("renders correct text when isIndex is true", () => {

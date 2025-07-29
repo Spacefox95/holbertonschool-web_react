@@ -1,16 +1,20 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import Footer from './Footer';
-import * as utils from '../../utils';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import Footer from "./Footer";
+import * as utils from "../utils";
 
-describe('Footer component', () => {
-  test('renders correct copyright text', () => {
-    jest.spyOn(utils, 'getFooterCopy').mockReturnValue('Holberton School');
-    jest.spyOn(utils, 'getCurrentYear').mockReturnValue(2025);
+describe("Footer component", () => {
+  test("renders correct text when isIndex is true", () => {
+    // Mock utility functions
+    jest.spyOn(utils, "getFooterCopy").mockReturnValue("Holberton School");
+    jest.spyOn(utils, "getCurrentYear").mockReturnValue(2025);
 
     render(<Footer />);
-    expect(screen.getByText(/©? ?2025 - holberton school/i)).toBeInTheDocument();
 
+    const footerText = screen.getByText(/2025 - holberton school/i);
+    expect(footerText).toBeInTheDocument();
+
+    // Clean up mocks
     jest.restoreAllMocks();
   });
 });

@@ -1,40 +1,40 @@
-import "./App.css";
-import Notifications from "./Notifications.jsx";
-import logo from "./assets/holberton-logo.jpg";
-import { getCurrentYear, getFooterCopy } from "./utils";
+import holbertonLogo from '../assets/holberton-logo.jpg'
+import '../App/App.css'
+import { getCurrentYear, getFooterCopy } from '../utils/utils'
+import Notifications from '../Notifications/Notifications';
 
 function App() {
+
   return (
     <>
-      <div className="root-notifications">
+      <div className='root-notifications'>
         <Notifications />
       </div>
-      <div className="App-header">
-        <img src={logo} alt="holberton logo" />
-        <h1 style={{ color: "#e1003c" }}>School dashboard</h1>
+
+      <div className='App-header'>
+        <img className='holberton-logo' src={holbertonLogo} alt='holberton logo' />
+        <h1>School Dashboard</h1>
       </div>
 
-      <div className="App-body">
+      <div className='App-body'>
         <p>Login to access the full dashboard</p>
 
         <form>
-          <label for="email">Email: </label>
-          <input type="email" id="email" name="email" />
+          <label htmlFor='email'>Email:</label>
+          <input id='email' name='email' type='email' />
 
-          <label for="password">Password: </label>
-          <input type="password" id="password" name="password" />
+          <label htmlFor='password'>Password:</label>
+          <input id='password' name='password' type='password' />
 
-          <button type="submit">OK</button>
+          <button type='submit'>OK</button>
         </form>
       </div>
 
-      <div className="App-footer">
-        <p>
-          Copyright {getCurrentYear()} - {getFooterCopy(false)}
-        </p>
+      <div className='App-footer'>
+        <p>Copyright {getCurrentYear()} - {getFooterCopy()}</p>
       </div>
     </>
-  );
+  )
 }
 
-export default App;
+export default App

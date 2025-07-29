@@ -13,7 +13,7 @@ function App() {
         <Notifications />
       </div>
       <div className="App-header">
-        <img src={logo} alt="holberton logo" />
+        <img src={logo} alt="holberton logo" className="holberton-logo" />
         <h1 style={{ color: "#e1003c" }}>School dashboard</h1>
       </div>
 
@@ -25,7 +25,7 @@ function App() {
             htmlFor="email"
             onClick={() => emailRef.current && emailRef.current.focus()}
           >
-            Email:{" "}
+            Email:
           </label>
           <input type="email" id="email" name="email" ref={emailRef} />
 
@@ -33,7 +33,7 @@ function App() {
             htmlFor="password"
             onClick={() => passwordRef.current && passwordRef.current.focus()}
           >
-            Password:{" "}
+            Password:
           </label>
           <input
             type="password"

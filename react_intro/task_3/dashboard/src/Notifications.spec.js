@@ -5,7 +5,7 @@ import Notifications from "./Notifications";
 describe("Notifications component", () => {
   test("render the notifications title", () => {
     render(<Notifications />);
-    const title = screen.getByText(/Here is the list of notifications/i);
+    const title = screen.getByText(/here is the list of notifications/i);
     expect(title).toBeInTheDocument();
   });
 
@@ -18,17 +18,20 @@ describe("Notifications component", () => {
   test("renders exactly 3 li elements", () => {
     render(<Notifications />);
     const listItems = screen.getAllByRole("listitem");
-    expect(listItems.length).toBe(3);
+    expect(listItems).toHaveLength(3);
   });
 
-  test("clicking the close button logs to console", () => {
-    console.log = jest.fn();
+  test("Logs message when close button is clicked", () => {
+    const consoleLog = jest.spyOn(console, "log").mockImplementation();
+
     render(<Notifications />);
-    const button = screen.getByRole("button", { name: /close/i });
-    fireEvent.click(button);
 
-    expect(console.log).toHaveBeenCalledWith("Close button has been clicked");
+    const closeButton = screen.getByRole("button", { name: /close/i });
 
-    console.log.mockRestore();
+    fireEvent.click(closeButton);
+
+    expect(consoleLog).toHaveBeenCalledWith("close button has been clicked");
+
+    consoleLog.mockRestore();
   });
 });

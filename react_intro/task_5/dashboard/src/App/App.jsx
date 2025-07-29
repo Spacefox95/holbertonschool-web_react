@@ -13,7 +13,7 @@ function App() {
 
       <div className='App-header'>
         <img className='holberton-logo' src={holbertonLogo} alt='holberton logo' />
-        <h1>School Dashboard</h1>
+        <h1>School dashboard</h1>
       </div>
 
       <div className='App-body'>
@@ -31,7 +31,7 @@ function App() {
       </div>
 
       <div className='App-footer'>
-        <p>Copyright {getCurrentYear()} - {getFooterCopy()}</p>
+        <p>Copyright {getCurrentYear()} {getFooterCopy()}</p>
       </div>
     </>
   )

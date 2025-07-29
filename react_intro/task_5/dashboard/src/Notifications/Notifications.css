@@ -1,9 +1,8 @@
 .notifications {
-	display:  flex;
-	flex-direction: column;
-	border: dotted 2px #e1003c ;
-	padding-left: 15px;
-	height: 150px;
+	margin: 1rem;
+	position: relative;
+	padding: 1rem;
+	border: 1px dashed red;
 }
 
 .notifications li[data-priority='default'] {

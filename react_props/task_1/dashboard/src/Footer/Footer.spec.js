@@ -1,20 +1,18 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import Footer from "./Footer";
-import * as utils from "../utils/utils";
+import App from "../App/App";
 
 describe("Footer component", () => {
   test("renders correct text when isIndex is true", () => {
-    // Mock utility functions
-    jest.spyOn(utils, "getFooterCopy").mockReturnValue("Holberton School");
-    jest.spyOn(utils, "getCurrentYear").mockReturnValue(2025);
+    render(<App />);
+    const bodyParagraph = screen.getByText(
+      /login to access the full dashboard/i
+    );
+    expect(bodyParagraph).toBeInTheDocument();
 
-    render(<Footer />);
-
-    const footerText = screen.getByText(/2025 - holberton school/i);
-    expect(footerText).toBeInTheDocument();
-
-    // Clean up mocks
-    jest.restoreAllMocks();
+    const currentYear = new Date().getFullYear();
+    const footerParagraph = screen.getByText(
+      new RegExp(`copyright ${currentYear} - holberton school`, "i")
+    );
+    expect(footerParagraph).toBeInTheDocument();
   });
 });

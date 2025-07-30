@@ -1,7 +1,10 @@
-import React from "react";
+import { useRef } from "react";
 import "./Login.css";
 
 function Login() {
+  const emailRef = useRef(null);
+  const passwrdRef = useRef(null);
+
   return (
     <div className="App-body">
       <p>Login to access the full dashboard</p>
@@ -9,7 +12,7 @@ function Login() {
       <form>
         <label
           htmlFor="email"
-          onClick={() => document.getElementById("email")?.focus()}
+          onClick={() => emailRef.current && emailRef.current.focus()}
         >
           Email:
         </label>
@@ -18,7 +21,7 @@ function Login() {
 
         <label
           htmlFor="password"
-          onClick={() => document.getElementById("password")?.focus()}
+          onClick={() => passwrdRef.current && passwrdRef.current.focus()}
         >
           Password:{" "}
         </label>

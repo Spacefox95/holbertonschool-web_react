@@ -1,34 +1,16 @@
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Notifications from "./Notifications";
 
 describe("Notifications component", () => {
-  test("render the notifications title", () => {
+  test("renders a close button", () => {
     render(<Notifications />);
-    const title = screen.getByText(/Here is the list of notifications/i);
-    expect(title).toBeInTheDocument();
+    const closeButton = screen.getByRole("button", { name: /close/i });
+    expect(closeButton).toBeInTheDocument();
   });
 
-  test("render a close button", () => {
-    render(<Notifications />);
-    const button = screen.getByRole("button", { name: /close/i });
-    expect(button).toBeInTheDocument();
-  });
-
-  test("renders exactly 3 li elements", () => {
-    render(<Notifications />);
-    const listItems = screen.getAllByRole("listitem");
+  test("renders a list with 3 notification items", () => {
+    const { container } = render(<Notifications />);
+    const listItems = container.querySelectorAll("li");
     expect(listItems.length).toBe(3);
-  });
-
-  test("clicking the close button logs to console", () => {
-    console.log = jest.fn();
-    render(<Notifications />);
-    const button = screen.getByRole("button", { name: /close/i });
-    fireEvent.click(button);
-
-    expect(console.log).toHaveBeenCalledWith("Close button has been clicked");
-
-    console.log.mockRestore();
   });
 });

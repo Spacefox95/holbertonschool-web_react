@@ -1,6 +1,6 @@
 .App-header {
   display: flex;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
 }
 
@@ -12,4 +12,5 @@
 .App-header h1 {
   display: flex;
   align-items: center;
+  color: #e1003c;
 }

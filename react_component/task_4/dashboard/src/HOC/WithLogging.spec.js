@@ -17,8 +17,11 @@ describe("WithLogging HOC", () => {
   });
 
   afterEach(() => {
-    consoleSpy.mockRestore();
     cleanup();
+    consoleSpy.mockClear();
+  });
+  afterAll(() => {
+    consoleSpy.mockRestore();
   });
 
   test("renders heading from wrapped component", () => {

@@ -2,18 +2,15 @@ import React from "react";
 import { Component } from "react";
 
 const WithLogging = (WrappedComponent) => {
+	const name =
+		WrappedComponent.displayName || WrappedComponent.name || "Component";
 	class HOC extends Component {
-		constructor() {
-			super();
-			this.name =
-				WrappedComponent.displayName || WrappedComponent.name || "Component";
-		}
 		componentDidMount() {
-			console.log(`Component ${this.name} is mounted`);
+			console.log(`Component ${name} is mounted`);
 		}
 
 		componentWillUnmount() {
-			console.log(`Component ${this.name} is going to unmount`);
+			console.log(`Component ${name} is going to unmount`);
 		}
 
 		render() {

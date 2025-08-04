@@ -4,6 +4,8 @@ import Footer from "../Footer/Footer.jsx";
 import Login from "../Login/Login.jsx";
 import Notifications from "../Notifications/Notifications.jsx";
 import { Component, Fragment } from "react";
+import BodySection from "../BodySection/BodySection.jsx";
+import BodySectionWithMarginBottom from "./../BodySection/BodySectionWithMarginBottom.jsx"
 import CourseList from "../CourseList/CourseList.jsx";
 
 class App extends Component {
@@ -45,10 +47,17 @@ class App extends Component {
         <Notifications notifications={notificationsList} />
         <Header />
         {isLoggedIn ? (
-          <CourseList courses={courseList} />
+          <BodySectionWithMarginBottom title="Course list">
+            <CourseList courses={courseList} />
+          </BodySectionWithMarginBottom>
         ) : (
-          <Login />
+          <BodySectionWithMarginBottom title="Log in to continue">
+            <Login />
+          </BodySectionWithMarginBottom>
         )}
+        <BodySection title='News from the School'>
+          <p>Holberton School News goes here</p>
+        </BodySection>
         <Footer />
       </Fragment>
     );

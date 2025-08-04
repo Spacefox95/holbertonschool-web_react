@@ -2,7 +2,7 @@ import { render } from "@testing-library/react";
 import BodySectionWithMarginBottom from "./BodySectionWithMarginBottom";
 
 describe("BodySectionWithMarginBottom", () => {
-  test("contains a div with the class bodySectionWothMargin", () => {
+  test("contains a div with the class bodySectionWithMargin", () => {
     const { container } = render(
 
       <BodySectionWithMarginBottom title="Test">

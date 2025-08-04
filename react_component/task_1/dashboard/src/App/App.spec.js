@@ -20,12 +20,12 @@ describe("App component", () => {
     expect(loginText).toBeInTheDocument();
   });
 
-  test("render footer compoenent", () => {
+  test("render footer component", () => {
     const currentYear = new Date().getFullYear();
+    render(<App />);
     const footer = screen.getByText((content) =>
-  content.includes(`Copyright ${currentYear}`)
-);
-
+      content.includes(`Copyright ${currentYear}`)
+    );
     expect(footer).toBeInTheDocument();
   });
 

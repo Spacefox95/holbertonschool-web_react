@@ -24,7 +24,7 @@ describe("CourseListRow", () => {
     expect(allTh).toHaveLength(1);
   });
 
-  test("When secondCEll not null, renders 2 th cells", () => {
+  test("When secondCell not null, renders 2 th cells", () => {
     const { container } = render(
       <table>
         <tbody>
@@ -39,7 +39,7 @@ describe("CourseListRow", () => {
     const tr = container.querySelector("tr");
     expect(tr).toBeInTheDocument();
 
-    const allTd = container.querySelectorAll("td");
+    const allTd = container.querySelectorAll("th");
     expect(allTd).toHaveLength(2);
     expect(allTd[0]).toHaveTextContent("test");
     expect(allTd[1]).toHaveTextContent("ok boomer");

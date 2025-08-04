@@ -3,7 +3,7 @@ import App from "../App/App";
 
 describe("Footer component", () => {
   test("renders correct text when isIndex is true", () => {
-    render(<App />);
+    render(<App isLoggedIn={false} />);
     const bodyParagraph = screen.getByText(
       /login to access the full dashboard/i
     );

@@ -22,9 +22,10 @@ describe("App component", () => {
 
   test("render footer compoenent", () => {
     const currentYear = new Date().getFullYear();
-    const footer = screen.getByText(
-      new RegExp(`Copyright\\s+${currentYear}`, "i")
-    );
+    const footer = screen.getByText((content) =>
+  content.includes(`Copyright ${currentYear}`)
+);
+
     expect(footer).toBeInTheDocument();
   });
 

@@ -15,7 +15,7 @@ class App extends Component {
   handleKeyDown = (event) => {
     if (event.ctrlKey && event.key === 'h') {
       alert('Logging you out');
-      this.defaultProps.logOut();
+      this.props.logOut();
     }
   };
 
@@ -23,7 +23,7 @@ class App extends Component {
     document.addEventListener("keydown", this.handleKeyDown)
   }
 
-  componenetWillUnmount() {
+  componentWillUnmount() {
     document.removeEventListener('keydown', this.handleKeyDown)
   }
 

@@ -21,7 +21,7 @@ describe("Notifications component", () => {
       },
     ];
 
-    render(<Notifications notifications={list} />);
+    const { container } = render(<Notifications notifications={list} />);
     const listItems = container.querySelectorAll("li");
     expect(listItems.length).toBe(3);
   });

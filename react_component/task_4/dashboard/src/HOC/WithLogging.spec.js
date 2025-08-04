@@ -28,7 +28,7 @@ describe("WithLogging HOC", () => {
     const MockAppLog = WithLogging(MockApp);
     render(<MockAppLog />);
     expect(
-      screen.getByText(/Hello from Mock App Component/i)
+      screen.getByRole("heading", { name: /Hello from Mock App Component/i })
     ).toBeInTheDocument();
   });
 

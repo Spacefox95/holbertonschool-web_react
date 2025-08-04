@@ -1,16 +1,17 @@
-import "./App.css";
-import Header from "../Header/Header.jsx";
-import Footer from "../Footer/Footer.jsx";
-import Login from "../Login/Login.jsx";
-import Notifications from "../Notifications/Notifications.jsx";
-import { Component, Fragment } from "react";
-import BodySection from "../BodySection/BodySection.jsx";
-import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom.jsx"
-import CourseList from "../CourseList/CourseList.jsx";
-import WithLogging from "../HOC/WithLogging.jsx"
+import React, { Component } from 'react';
+import './App.css'
+import Notifications from '../Notifications/Notifications';
+import Header from '../Header/Header';
+import Login from '../Login/Login';
+import Footer from '../Footer/Footer';
+import CourseList from '../CourseList/CourseList';
+import BodySection from '../BodySection/BodySection';
+import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
+import WithLogging from '../HOC/WithLogging';
+import { getLatestNotification } from "../utils/utils";
 
 const LoginWithLogging = WithLogging(Login);
-const CourseListWithLogging = WithLogging(CourseList)
+const CourseListWithLogging = WithLogging(CourseList);
 
 class App extends Component {
   static defaultProps = {
@@ -33,37 +34,67 @@ class App extends Component {
     document.removeEventListener('keydown', this.handleKeyDown)
   }
 
-
-
   render() {
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn = false } = this.props;
 
     const notificationsList = [
-      { id: 1, type: "default", value: "New course available" },
-      { id: 2, type: "urgent", value: "New resume available" },
-      { id: 3, type: "urgent", html: { __html: "<strong>Urgent requirement</strong> - complete by EOD" } },
+      {
+        id: 1,
+        type: "default",
+        value: "New course available"
+      },
+      {
+        id: 2,
+        type: "urgent",
+        value: "New resume available"
+      },
+      {
+        id: 3,
+        type: "urgent",
+        value: getLatestNotification()
+      }
     ];
 
-    const courseList = []
+    const coursesList = [
+      {
+        id: 1,
+        name: 'ES6',
+        credit: 60
+      },
+      {
+        id: 2,
+        name: 'Webpack',
+        credit: 20
+      },
+      {
+        id: 3,
+        name: 'React',
+        credit: 40
+      }
+    ];
 
     return (
-      <Fragment>
+      <>
         <Notifications notifications={notificationsList} />
+
         <Header />
+
         {isLoggedIn ? (
           <BodySectionWithMarginBottom title="Course list">
-            <CourseListWithLogging courses={courseList} />
+            <CourseListWithLogging courses={coursesList} />
           </BodySectionWithMarginBottom>
         ) : (
           <BodySectionWithMarginBottom title="Log in to continue">
             <LoginWithLogging />
           </BodySectionWithMarginBottom>
         )}
-        <BodySection title='News from the School'>
+
+        <BodySection title="News from the School">
           <p>Holberton School News goes here</p>
         </BodySection>
+
         <Footer />
-      </Fragment>
+      </>
     );
   }
 }

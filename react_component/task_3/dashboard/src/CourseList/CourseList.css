@@ -1,0 +1,25 @@
+#CourseList {
+	border: 1px solid;
+	border-collapse: collapse;
+	margin-top: 40px;
+	width: 80%;
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#CourseList th,
+#CourseList td {
+	border: 1px solid;
+	padding: 0.4rem;
+}
+
+#CourseList th[colspan="2"],
+#CourseList td[colspan="2"] {
+	text-align: center;
+	font-weight: bold;
+}
+
+#CourseList td {
+	text-align: left;
+}

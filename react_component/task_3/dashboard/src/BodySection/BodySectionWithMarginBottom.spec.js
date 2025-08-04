@@ -4,11 +4,12 @@ import BodySectionWithMarginBottom from "./BodySectionWithMarginBottom";
 describe("BodySectionWithMarginBottom", () => {
   test("contains a div with the class bodySectionWothMargin", () => {
     const { container } = render(
+
       <BodySectionWithMarginBottom title="Test">
         <p>Content</p>
       </BodySectionWithMarginBottom>
     );
-    expect(container.firstChild).toHaveClass("BodySectionWithMargin");
+    expect(container.firstChild).toHaveClass("bodySectionWithMargin");
   });
 
   test("renders the BOdySection component with correct content", () => {

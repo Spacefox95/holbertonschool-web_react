@@ -4,7 +4,7 @@ import "./BodySectionWithMarginBottom.css";
 
 function BodySectionWithMarginBottom({ title, children }) {
   return (
-    <div className="BodySectionWithMargin">
+    <div className="bodySectionWithMargin">
       <BodySection title={title}>{children}</BodySection>
     </div>
   );

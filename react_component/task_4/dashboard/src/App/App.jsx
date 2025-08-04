@@ -1,0 +1,71 @@
+import "./App.css";
+import Header from "../Header/Header.jsx";
+import Footer from "../Footer/Footer.jsx";
+import Login from "../Login/Login.jsx";
+import Notifications from "../Notifications/Notifications.jsx";
+import { Component, Fragment } from "react";
+import BodySection from "../BodySection/BodySection.jsx";
+import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom.jsx"
+import CourseList from "../CourseList/CourseList.jsx";
+import WithLogging from "../HOC/WithLogging.jsx"
+
+const LoginWithLogging = WithLogging(Login);
+const CourseListWithLogging = WithLogging(CourseList)
+
+class App extends Component {
+  static defaultProps = {
+    isLoggedIn: true,
+    logOut: () => { }
+  };
+
+  handleKeyDown = (event) => {
+    if (event.ctrlKey && event.key === 'h') {
+      alert('Logging you out');
+      this.props.logOut();
+    }
+  };
+
+  componentDidMount() {
+    document.addEventListener("keydown", this.handleKeyDown)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyDown)
+  }
+
+
+
+  render() {
+    const { isLoggedIn } = this.props;
+
+    const notificationsList = [
+      { id: 1, type: "default", value: "New course available" },
+      { id: 2, type: "urgent", value: "New resume available" },
+      { id: 3, type: "urgent", html: { __html: "<strong>Urgent requirement</strong> - complete by EOD" } },
+    ];
+
+    const courseList = []
+
+    return (
+      <Fragment>
+        <Notifications notifications={notificationsList} />
+        <Header />
+        {isLoggedIn ? (
+          <BodySectionWithMarginBottom title="Course list">
+            <CourseListWithLogging courses={courseList} />
+          </BodySectionWithMarginBottom>
+        ) : (
+          <BodySectionWithMarginBottom title="Log in to continue">
+            <LoginWithLogging />
+          </BodySectionWithMarginBottom>
+        )}
+        <BodySection title='News from the School'>
+          <p>Holberton School News goes here</p>
+        </BodySection>
+        <Footer />
+      </Fragment>
+    );
+  }
+}
+
+export default App;

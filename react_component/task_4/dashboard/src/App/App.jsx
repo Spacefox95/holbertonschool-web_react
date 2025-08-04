@@ -14,7 +14,7 @@ const CourseListWithLogging = WithLogging(CourseList)
 
 class App extends Component {
   static defaultProps = {
-    isLoggedIn: true,
+    isLoggedIn: false,
     logOut: () => { }
   };
 

@@ -8,7 +8,7 @@ describe("BodySectionWithMarginBottom", () => {
         <p>Content</p>
       </BodySectionWithMarginBottom>
     );
-    expect(container.firstChild).toHaveClass("bodySectionWithMargin");
+    expect(container.firstChild).toHaveClass("BodySectionWithMargin");
   });
 
   test("renders the BOdySection component with correct content", () => {

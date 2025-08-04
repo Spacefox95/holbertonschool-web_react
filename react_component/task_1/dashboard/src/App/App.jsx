@@ -8,14 +8,14 @@ import CourseList from "../CourseList/CourseList.jsx";
 
 class App extends Component {
   static defaultProps = {
-    isLoggedIn: false,
+    isLoggedIn: true,
     logOut: () => { }
   };
 
   handleKeyDown = (event) => {
     if (event.ctrlKey && event.key === 'h') {
       alert('Logging you out');
-      this.props.logOut();
+      this.defaultProps.logOut();
     }
   };
 

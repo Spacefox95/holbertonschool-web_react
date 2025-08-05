@@ -1,6 +1,16 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import CourseList from './CourseList';
+import { StyleSheetTestUtils } from "aphrodite";
+
+beforeEach(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
+
+// Re-enable style injection after each test
+afterEach(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
 test('renders 5 different rows when it receives an array of courses objects', () => {
     const courses = [

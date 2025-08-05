@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
-import { StyleSheetTestUtils } from "aphrodite";
 import BodySectionWithMarginBottom from "./BodySectionWithMarginBottom";
+import { StyleSheetTestUtils } from "aphrodite";
 
 beforeEach(() => {
   StyleSheetTestUtils.suppressStyleInjection();

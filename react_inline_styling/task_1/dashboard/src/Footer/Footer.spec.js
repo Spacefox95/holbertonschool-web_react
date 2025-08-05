@@ -1,5 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import App from "../App/App";
+import { StyleSheetTestUtils } from "aphrodite";
+beforeEach(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
+// Re-enable style injection after each test
+afterEach(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
 describe("Footer component", () => {
   test("renders correct text when isIndex is true", () => {

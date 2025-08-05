@@ -1,5 +1,15 @@
 import { render, screen } from "@testing-library/react";
 import Header from "./Header";
+import { StyleSheetTestUtils } from "aphrodite";
+
+beforeEach(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
+
+// Re-enable style injection after each test
+afterEach(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
 describe("Header component", () => {
   test('renders the heading with text "School dashboard"', () => {

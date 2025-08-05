@@ -1,6 +1,16 @@
 import Login from "./Login";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { StyleSheetTestUtils } from "aphrodite";
+
+beforeEach(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
+
+// Re-enable style injection after each test
+afterEach(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
 describe("Login component", () => {
   test("renders 2 labels, 2 inputs and 1 button", () => {

@@ -3,28 +3,45 @@ import "./Notifications.css";
 import closeIcon from "../assets/close-button.png";
 import NotificationItem from "./NotificationItem";
 
-const Notifications = ({ notifications = [] }) => {
-  const handleClick = () => {
-    console.log("Close button has been clicked");
-  };
-
+function Notifications({ displayDrawer = false, notifications = [] }) {
   return (
-    <div className="notifications">
-      <button
-        style={{ position: "absolute", top: "10px", right: "10px" }}
-        aria-label="Close"
-        onClick={handleClick}
-      >
-        <img src={closeIcon} alt="close" style={{ height: "15px", width: "15px" }} />
-      </button>
-      <p>Here is the list of notifications</p>
-      <ul>
-        {notifications.map(({ id, type, value, html }) => (
-          <NotificationItem key={id} type={type} value={value} html={html} />
-        ))}
-      </ul>
-    </div>
-  );
-};
+    <>
+      <div className="notifications-title">Your notifications</div>
 
-export default Notifications;
+      {displayDrawer && (
+        <div className="notifications">
+          <button
+            aria-label="Close"
+            style={{
+              position: 'absolute',
+              top: '10px',
+              right: '10px',
+              background: 'none',
+              border: 'none'
+            }}>
+            <img
+              src={closeIcon}
+              alt="close"
+              style={{ height: '15px', width: '15px' }} />
+          </button>
+
+          {notifications.length === 0 ? (
+            <p>No new notification for now</p>
+          ) : (
+            <>
+              <p>
+                Here is the list of notifications</p>
+              <ul>
+                {notifications.map((notif) => (
+                  <NotificationItem key={notif.id} {...notif} />
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+      )}
+    </>
+  );
+}
+
+export default Notifications

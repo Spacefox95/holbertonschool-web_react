@@ -6,6 +6,15 @@
 	height: 150px;
 }
 
+.notifications ul {
+	list-style: none;
+	padding: 0;
+}
+
+.notifications li {
+	margin: 5px 0;
+}
+
 .notifications li[data-priority='default'] {
 	color: blue;
 }

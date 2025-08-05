@@ -1,4 +1,5 @@
 import React, { PureComponent, createRef } from 'react';
+import { StyleSheet, css } from 'aphrodite';
 
 class NotificationItem extends PureComponent {
     constructor(props) {
@@ -49,6 +50,7 @@ class NotificationItem extends PureComponent {
         if (html) {
             return (
                 <li
+                    className={css(style.t)}
                     ref={this.liRef}
                     data-notification-type={type}
                     dangerouslySetInnerHTML={html}
@@ -79,5 +81,12 @@ class NotificationItem extends PureComponent {
         );
     }
 }
+
+const style = {
+    t: {
+        border: 'none'
+    }
+}
+
 
 export default NotificationItem;

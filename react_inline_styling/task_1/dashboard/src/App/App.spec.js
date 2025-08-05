@@ -4,8 +4,8 @@ import App from "./App";
 describe("App component", () => {
   test("render Noitifications component", () => {
     render(<App />);
-    const notifications = screen.getByText(/notifications/i);
-    expect(notifications).toBeInTheDocument();
+    const notificationsTitle = screen.getByText("Your notifications");
+    expect(notificationsTitle).toBeInTheDocument();
   });
 
   test("renders Header, Login, Footer, and Notifications", () => {

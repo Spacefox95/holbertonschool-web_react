@@ -1,5 +1,15 @@
 import { render } from "@testing-library/react";
+import { StyleSheetTestUtils } from "aphrodite";
 import BodySectionWithMarginBottom from "./BodySectionWithMarginBottom";
+
+beforeEach(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
+
+// Re-enable style injection after each test
+afterEach(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
 describe("BodySectionWithMarginBottom", () => {
   test("renders the BOdySection component with correct content", () => {

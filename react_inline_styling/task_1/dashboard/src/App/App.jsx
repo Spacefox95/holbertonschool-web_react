@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import Notifications from '../Notifications/Notifications';
-import Header from '../Header/Header';
-import Login from '../Login/Login';
-import Footer from '../Footer/Footer';
-import CourseList from '../CourseList/CourseList';
-import BodySection from '../BodySection/BodySection';
-import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
-import WithLogging from '../HOC/WithLogging';
+import React, { Component } from "react";
+import Notifications from "../Notifications/Notifications";
+import Header from "../Header/Header";
+import Login from "../Login/Login";
+import Footer from "../Footer/Footer";
+import CourseList from "../CourseList/CourseList";
+import BodySection from "../BodySection/BodySection";
+import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
+import WithLogging from "../HOC/WithLogging";
 import { getLatestNotification } from "../utils/utils";
-import { StyleSheet, css } from "aphrodite"
+import { StyleSheet, css } from "aphrodite";
 
 const LoginWithLogging = WithLogging(Login);
 const CourseListWithLogging = WithLogging(CourseList);
@@ -16,22 +16,22 @@ const CourseListWithLogging = WithLogging(CourseList);
 class App extends Component {
   static defaultProps = {
     isLoggedIn: true,
-    logOut: () => { }
+    logOut: () => {},
   };
 
   handleKeyDown = (event) => {
-    if (event.ctrlKey && event.key === 'h') {
-      alert('Logging you out');
+    if (event.ctrlKey && event.key === "h") {
+      alert("Logging you out");
       this.props.logOut();
     }
   };
 
   componentDidMount() {
-    document.addEventListener("keydown", this.handleKeyDown)
+    document.addEventListener("keydown", this.handleKeyDown);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeyDown)
+    document.removeEventListener("keydown", this.handleKeyDown);
   }
 
   render() {
@@ -41,36 +41,36 @@ class App extends Component {
       {
         id: 1,
         type: "default",
-        value: "New course available"
+        value: "New course available",
       },
       {
         id: 2,
         type: "urgent",
-        value: "New resume available"
+        value: "New resume available",
       },
       {
         id: 3,
         type: "urgent",
-        value: getLatestNotification()
-      }
+        value: getLatestNotification(),
+      },
     ];
 
     const coursesList = [
       {
         id: 1,
-        name: 'ES6',
-        credit: 60
+        name: "ES6",
+        credit: 60,
       },
       {
         id: 2,
-        name: 'Webpack',
-        credit: 20
+        name: "Webpack",
+        credit: 20,
       },
       {
         id: 3,
-        name: 'React',
-        credit: 40
-      }
+        name: "React",
+        credit: 40,
+      },
     ];
 
     return (
@@ -89,7 +89,7 @@ class App extends Component {
           </BodySectionWithMarginBottom>
         )}
 
-        <BodySection title="News from the School">
+        <BodySection title="News from the School" className={css(styles.body)}>
           <p>Holberton School News goes here</p>
         </BodySection>
 
@@ -101,14 +101,19 @@ class App extends Component {
 
 const styles = StyleSheet.create({
   footer: {
-    marginTop: '300px',
-    display: 'flex',
-    justifyContent: 'center',
-    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;',
-    fontStyle: 'italic',
-    fontWeight: 'lighter',
-    borderTop: 'solid #e1003c 2px'
-  }
-})
+    marginTop: "300px",
+    display: "flex",
+    justifyContent: "center",
+    fontFamily:
+      'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;',
+    fontStyle: "italic",
+    fontWeight: "lighter",
+    borderTop: "solid #e1003c 2px",
+  },
+
+  body: {
+    border: "none",
+  },
+});
 
 export default App;

@@ -95,7 +95,6 @@ class Notifications extends Component {
           <div
             className={css(styles.title)}
             onClick={() => {
-              console.log("ok");
               this.props.handleDisplayDrawer();
             }}
           >

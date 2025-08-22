@@ -16,23 +16,23 @@ const CourseListWithLogging = WithLogging(CourseList);
 class App extends Component {
   static defaultProps = {
     isLoggedIn: false,
-    logOut: () => { },
+    logOut: () => {},
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      displayDrawer: false
+      displayDrawer: false,
     };
-  };
+  }
 
   handleDisplayDrawer = () => {
-    this.setState({ displayDrawer: true })
+    this.setState({ displayDrawer: true });
   };
 
   handleHideDrawer = () => {
-    this.setState({ displayDrawer: false })
-  }
+    this.setState({ displayDrawer: false });
+  };
 
   handleKeyDown = (event) => {
     if (event.ctrlKey && event.key === "h") {
@@ -90,7 +90,12 @@ class App extends Component {
 
     return (
       <>
-        <Notifications notifications={notificationsList} displayDrawer={this.state.displayDrawer} handleDisplayDrawer={this.handleDisplayDrawer} handleHideDrawer={this.handleHideDrawer} />
+        <Notifications
+          notifications={notificationsList}
+          displayDrawer={this.state.displayDrawer}
+          handleDisplayDrawer={this.handleDisplayDrawer}
+          handleHideDrawer={this.handleHideDrawer}
+        />
 
         <Header />
 

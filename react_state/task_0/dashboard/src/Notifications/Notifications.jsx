@@ -9,16 +9,22 @@ class Notifications extends Component {
   };
 
   shouldComponentUpdate(nextProps) {
-    return nextProps.notifications.length !== this.props.notifications.length;
+    return (
+      nextProps.notifications.length !== this.props.notifications.length ||
+      nextProps.displayDrawer !== this.props.displayDrawer
+    );
   }
 
   render() {
-    const { notifications = [],
+    const {
+      notifications = [],
       displayDrawer = false,
       handleDisplayDrawer,
-      handleHideDrawer
+      handleHideDrawer,
     } = this.props;
     let drawerContent = null;
+
+    console.log("displayDrawer:", displayDrawer);
 
     if (displayDrawer) {
       let content = "No new notification for now";
@@ -86,7 +92,15 @@ class Notifications extends Component {
     return (
       <div className={css(styles.rootNotifications)}>
         <div className={css(styles.notificationContainer)}>
-          <div className={css(styles.title)} onClick={this.props.handleDisplayDrawer}>Your notifications</div>
+          <div
+            className={css(styles.title)}
+            onClick={() => {
+              console.log("ok");
+              this.props.handleDisplayDrawer();
+            }}
+          >
+            Your notifications
+          </div>
           {drawerContent}
         </div>
       </div>
@@ -98,9 +112,13 @@ const styles = StyleSheet.create({
   rootNotifications: {
     position: "relative",
   },
-  notificationContainer: {},
+  notificationContainer: {
+    position: "relative",
+    width: "200px",
+  },
   title: {
     fontWeight: "bold",
+    cursor: "pointer",
   },
   notifications: {
     display: "flex",
@@ -108,7 +126,7 @@ const styles = StyleSheet.create({
     border: "2px dotted #e1003c",
     paddingLeft: "15px",
     height: "150px",
-    '@media (max-width: 900px)': {
+    "@media (max-width: 900px)": {
       position: "fixed",
       top: 0,
       left: 0,

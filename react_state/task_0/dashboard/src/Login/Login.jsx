@@ -1,46 +1,86 @@
-import { useRef } from "react";
+import { Component } from "react";
 import { StyleSheet, css } from "aphrodite";
 
-function Login() {
-  const emailRef = useRef(null);
-  const passwrdRef = useRef(null);
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false,
+      email: '',
+      password: '',
+      enableSubmit: false
+    };
+  }
 
-  return (
-    <div className={css(styles.body)}>
-      <p>Login to access the full dashboard</p>
+  handleLoginSubmit = (event) => {
+    event.preventDefault();
+    this.setState({ isLoggedIn: true });
+    console.log('Logged in successfully', this.state.email)
+  }
 
-      <form className={css(styles.form)}>
-        <label
-          htmlFor="email"
-          onClick={() => emailRef.current && emailRef.current.focus()}
-        >
-          Email:
-        </label>
+  handleChangeEmail = (event) => {
+    const email = event.target.value;
+    this.setState({ email }, this.validateForm);
+  };
 
-        <input
-          className={css(styles.input)}
-          type="email"
-          id="email"
-          name="email"
-        />
+  handleChangePassword = (event) => {
+    const password = event.target.value;
+    this.setState({ password }, this.validateForm)
+  };
 
-        <label
-          htmlFor="password"
-          onClick={() => passwrdRef.current && passwrdRef.current.focus()}
-        >
-          Password:{" "}
-        </label>
-        <input
-          className={css(styles.input)}
-          type="password"
-          id="password"
-          name="password"
-        />
+  validateForm = () => {
+    const { email, password } = this.state;
+    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const passwordValid = password.length >= 8;
+    this.setState({ enableSubmit: emailValid && passwordValid })
+  };
 
-        <button type="submit">OK</button>
-      </form>
-    </div>
-  );
+  render() {
+    const { email, password, enableSubmit, isLoggedIn } = this.state;
+
+    if (isLoggedIn) {
+      return (
+        <div className={css(styles.body)}>
+          <p>Welcome back, {email}!</p>
+        </div>
+      );
+    }
+
+    return (
+      <div className={css(styles.body)}>
+        <p>Login to access the full dashboard</p>
+
+        <form className={css(styles.form)} onSubmit={this.handleLoginSubmit}>
+          <label htmlFor="email">Email:</label>
+          <input
+            className={css(styles.input)}
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={this.handleChangeEmail}
+          />
+
+          <label htmlFor="password">Password:</label>
+          <input
+            className={css(styles.input)}
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={this.handleChangePassword}
+          />
+
+          <input
+            type="submit"
+            value="OK"
+            disabled={!enableSubmit}
+            className={css(styles.submit)}
+          />
+        </form>
+      </div>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -50,6 +90,10 @@ const styles = StyleSheet.create({
   },
   input: {
     margin: "0 5px",
+  },
+  submit: {
+    marginTop: "10px",
+    cursor: "pointer",
   },
   form: {
     '@media (max-width: 900px)': {

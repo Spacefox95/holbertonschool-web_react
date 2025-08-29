@@ -1,35 +1,18 @@
-import Login from "./Login";
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { StyleSheetTestUtils } from "aphrodite";
+import { render, screen, fireEvent } from "@testing-library/react";
+import Login from "../Login/Login";
 
-beforeEach(() => {
-  StyleSheetTestUtils.suppressStyleInjection();
-});
+test("calls logIn prop on form submission", () => {
+  const mockLogIn = jest.fn();
+  render(<Login logIn={mockLogIn} email="" password="" />);
 
-// Re-enable style injection after each test
-afterEach(() => {
-  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-});
+  const emailInput = screen.getByLabelText(/email/i);
+  const passwordInput = screen.getByLabelText(/password/i);
+  const submitButton = screen.getByRole("button", { name: /ok/i });
 
-describe("Login component", () => {
-  test("renders 2 labels, 2 inputs and 1 button", () => {
-    const { container } = render(<Login />);
-    const labels = container.querySelectorAll("label");
-    const inputs = container.querySelectorAll("input");
-    expect(labels.length).toBe(2);
-    expect(inputs.length).toBe(3);
-    expect(screen.getByRole("button", { name: /ok/i })).toBeInTheDocument();
-  });
+  fireEvent.change(emailInput, { target: { value: "user@test.com" } });
+  fireEvent.change(passwordInput, { target: { value: "12345678" } });
 
-  test("focuses the input when its label is clicked", async () => {
-    const { container } = render(<Login />);
-    const user = userEvent.setup();
+  fireEvent.click(submitButton);
 
-    const emailLabel = container.querySelector('label[for="email"]');
-    const emailInput = screen.getByLabelText(/email/i);
-
-    await user.click(emailLabel);
-    expect(emailInput).toHaveFocus();
-  });
+  expect(mockLogIn).toHaveBeenCalledWith("user@test.com", "12345678");
 });

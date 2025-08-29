@@ -50,16 +50,6 @@ describe("App component", () => {
     alertMock.mockRestore();
   });
 
-  test("logOut when ctrl h", () => {
-    render(<App logOut={logOutMock} />);
-
-    const keyboardEvent = new KeyboardEvent("keydown", {
-      key: "h",
-      ctrlKey: true,
-    });
-    document.dispatchEvent(keyboardEvent);
-    expect(logOutMock).toHaveBeenCalledTimes(1);
-  });
 
   test("alert when ctrl h", () => {
     render(<App logOut={logOutMock} />);

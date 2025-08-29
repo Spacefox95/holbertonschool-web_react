@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Notifications from "../Notifications/Notifications";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
-import newContext, { defaultUser } from "../Context/context";
 import Footer from "../Footer/Footer";
 import CourseList from "../CourseList/CourseList";
 import BodySection from "../BodySection/BodySection";
@@ -10,6 +9,7 @@ import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBot
 import WithLogging from "../HOC/WithLogging";
 import { getLatestNotification } from "../utils/utils";
 import { StyleSheet, css } from "aphrodite";
+import { newContext } from "../Context/context";
 
 const LoginWithLogging = WithLogging(Login);
 const CourseListWithLogging = WithLogging(CourseList);
@@ -19,41 +19,23 @@ class App extends Component {
     super(props);
     this.state = {
       displayDrawer: false,
-      user: defaultUser,
-      logOut: this.logOut,
+      user: {
+        email: "",
+        password: "",
+        isLoggedIn: false,
+      },
     };
   }
 
-  logIn = (email, password) => {
-    this.setState({
-      user: {
-        email,
-        password,
-        isLoggedIn: true,
-      }
-    });
-  };
+  // Show/Hide Notifications
+  handleDisplayDrawer = () => this.setState({ displayDrawer: true });
+  handleHideDrawer = () => this.setState({ displayDrawer: false });
 
-  logOut = () => {
-    this.setState({ user: defaultUser });
-  };
-
-  handleDisplayDrawer = () => {
-    this.setState({ displayDrawer: true });
-  };
-
-  handleHideDrawer = () => {
-    this.setState({ displayDrawer: false });
-  };
-
+  // Key shortcut for logout
   handleKeyDown = (event) => {
     if (event.ctrlKey && event.key === "h") {
       alert("Logging you out");
-      if (this.props.logOut) {
-        this.props.logOut();
-      } else {
-        this.logOut();
-      }
+      this.logOut();
     }
   };
 
@@ -65,50 +47,39 @@ class App extends Component {
     document.removeEventListener("keydown", this.handleKeyDown);
   }
 
+  // Login/Logout methods
+  logIn = (email, password) => {
+    this.setState({
+      user: { email, password, isLoggedIn: true },
+    });
+  };
+
+  logOut = () => {
+    this.setState({
+      user: { email: "", password: "", isLoggedIn: false },
+    });
+  };
+
   render() {
-    const { user } = this.state;
+    const { user, displayDrawer } = this.state;
 
     const notificationsList = [
-      {
-        id: 1,
-        type: "default",
-        value: "New course available",
-      },
-      {
-        id: 2,
-        type: "urgent",
-        value: "New resume available",
-      },
-      {
-        id: 3,
-        type: "urgent",
-        value: getLatestNotification(),
-      },
+      { id: 1, type: "default", value: "New course available" },
+      { id: 2, type: "urgent", value: "New resume available" },
+      { id: 3, type: "urgent", value: getLatestNotification() },
     ];
 
     const coursesList = [
-      {
-        id: 1,
-        name: "ES6",
-        credit: 60,
-      },
-      {
-        id: 2,
-        name: "Webpack",
-        credit: 20,
-      },
-      {
-        id: 3,
-        name: "React",
-        credit: 40,
-      },
+      { id: 1, name: "ES6", credit: 60 },
+      { id: 2, name: "Webpack", credit: 20 },
+      { id: 3, name: "React", credit: 40 },
     ];
 
     return (
-      <newContext.Provider value={this.state}>
+      <newContext.Provider value={{ user, logOut: this.logOut }}>
         <Notifications
           notifications={notificationsList}
-          displayDrawer={this.state.displayDrawer}
+          displayDrawer={displayDrawer}
           handleDisplayDrawer={this.handleDisplayDrawer}
           handleHideDrawer={this.handleHideDrawer}
         />
@@ -150,10 +121,7 @@ const styles = StyleSheet.create({
     fontWeight: "lighter",
     borderTop: "solid #e1003c 2px",
   },
-
-  body: {
-    border: "none",
-  },
+  body: { border: "none" },
 });
 
 export default App;

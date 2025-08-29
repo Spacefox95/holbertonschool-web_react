@@ -1,23 +1,21 @@
 import { Component } from "react";
 import { StyleSheet, css } from "aphrodite";
 
-
 class Login extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      email: props.email || '',
-      password: props.password || '',
-      enableSubmit: false
+      email: props.email || "",
+      password: props.password || "",
+      enableSubmit: false,
     };
   }
 
   handleLoginSubmit = (event) => {
     event.preventDefault();
     const { email, password } = this.state;
-    this.props.logIn(email, password)
-  }
+    this.props.logIn(email, password); // Use prop
+  };
 
   handleChangeEmail = (event) => {
     const email = event.target.value;
@@ -26,14 +24,14 @@ class Login extends Component {
 
   handleChangePassword = (event) => {
     const password = event.target.value;
-    this.setState({ password }, this.validateForm)
+    this.setState({ password }, this.validateForm);
   };
 
   validateForm = () => {
     const { email, password } = this.state;
     const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     const passwordValid = password.length >= 8;
-    this.setState({ enableSubmit: emailValid && passwordValid })
+    this.setState({ enableSubmit: emailValid && passwordValid });
   };
 
   render() {
@@ -64,7 +62,6 @@ class Login extends Component {
             onChange={this.handleChangePassword}
           />
 
-          
           <input
             type="submit"
             value="OK"
@@ -78,25 +75,17 @@ class Login extends Component {
 }
 
 const styles = StyleSheet.create({
-  body: {
-    marginTop: "100px",
-    textAlign: "center",
-  },
-  input: {
-    margin: "0 5px",
-  },
-  submit: {
-    marginTop: "10px",
-    cursor: "pointer",
-  },
+  body: { marginTop: "100px", textAlign: "center" },
+  input: { margin: "0 5px" },
+  submit: { marginTop: "10px", cursor: "pointer" },
   form: {
-    '@media (max-width: 900px)': {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      gap: '0.5rem'
-    }
-  }
+    "@media (max-width: 900px)": {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
+      gap: "0.5rem",
+    },
+  },
 });
 
 export default Login;

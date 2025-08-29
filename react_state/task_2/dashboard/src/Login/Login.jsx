@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { StyleSheet, css } from "aphrodite";
-import App from "../App/App";
+
 
 class Login extends Component {
 
@@ -64,12 +64,11 @@ class Login extends Component {
             onChange={this.handleChangePassword}
           />
 
-          <input
+          <button
             type="submit"
-            value="OK"
             disabled={!enableSubmit}
             className={css(styles.submit)}
-          />
+          >OK</button>
         </form>
       </div>
     );

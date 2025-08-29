@@ -8,14 +8,14 @@ class Login extends Component {
     super(props);
     this.state = {
       email: props.email || '',
-      password: props.password ||'',
+      password: props.password || '',
       enableSubmit: false
     };
   }
 
   handleLoginSubmit = (event) => {
     event.preventDefault();
-    const { email, password} = this.state;
+    const { email, password } = this.state;
     this.props.logIn(email, password)
   }
 
@@ -37,15 +37,7 @@ class Login extends Component {
   };
 
   render() {
-    const { email, password, enableSubmit, isLoggedIn } = this.state;
-
-    if (isLoggedIn) {
-      return (
-        <div className={css(styles.body)}>
-          <p>Welcome back, {email}!</p>
-        </div>
-      );
-    }
+    const { email, password, enableSubmit } = this.state;
 
     return (
       <div className={css(styles.body)}>

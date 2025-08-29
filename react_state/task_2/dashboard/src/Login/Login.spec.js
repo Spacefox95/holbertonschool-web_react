@@ -18,7 +18,7 @@ describe("Login component", () => {
     const labels = container.querySelectorAll("label");
     const inputs = container.querySelectorAll("input");
     expect(labels.length).toBe(2);
-    expect(inputs.length).toBe(2);
+    expect(inputs.length).toBe(3);
     expect(screen.getByRole("button", { name: /ok/i })).toBeInTheDocument();
   });
 

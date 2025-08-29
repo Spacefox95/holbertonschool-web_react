@@ -64,11 +64,13 @@ class Login extends Component {
             onChange={this.handleChangePassword}
           />
 
-          <button
+          
+          <input
             type="submit"
+            value="OK"
             disabled={!enableSubmit}
             className={css(styles.submit)}
-          >OK</button>
+          />
         </form>
       </div>
     );

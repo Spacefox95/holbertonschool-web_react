@@ -4,38 +4,47 @@ import { StyleSheet, css } from "aphrodite";
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      email: props.email || "",
-      password: props.password || "",
-      enableSubmit: false,
-    };
+    this.state = { enableSubmit: false };
+  }
+
+  componentDidMount() {
+    this.validateForm();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.email !== this.props.email ||
+      prevProps.password !== this.props.password
+    ) {
+      this.validateForm();
+    }
   }
 
   handleLoginSubmit = (event) => {
     event.preventDefault();
-    const { email, password } = this.state;
-    this.props.logIn(email, password); // Use prop
+    const { email, password, logIn } = this.props;
+    logIn(email, password);
   };
 
   handleChangeEmail = (event) => {
-    const email = event.target.value;
-    this.setState({ email }, this.validateForm);
+    this.props.onEmailChange?.(event.target.value);
+    this.validateForm(event.target.value, this.props.password);
   };
 
   handleChangePassword = (event) => {
-    const password = event.target.value;
-    this.setState({ password }, this.validateForm);
+    this.props.onPasswordChange?.(event.target.value);
+    this.validateForm(this.props.email, event.target.value);
   };
 
-  validateForm = () => {
-    const { email, password } = this.state;
+  validateForm = (email = this.props.email, password = this.props.password) => {
     const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     const passwordValid = password.length >= 8;
     this.setState({ enableSubmit: emailValid && passwordValid });
   };
 
   render() {
-    const { email, password, enableSubmit } = this.state;
+    const { email, password } = this.props;
+    const { enableSubmit } = this.state;
 
     return (
       <div className={css(styles.body)}>

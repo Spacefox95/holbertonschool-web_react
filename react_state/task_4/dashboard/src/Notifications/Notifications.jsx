@@ -1,17 +1,27 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { StyleSheet, css } from "aphrodite";
 import NotificationItem from "./NotificationItem";
 import closeButton from "../assets/close-button.png";
 
-class Notifications extends Component {
+class Notifications extends PureComponent {
+  static defaultProps = {
+    notifications: [],
+    displayDrawer: false,
+    markNotificationAsRead: (id) => console.log(`Notification ${id} has been marked as read`),
+    handleDisplayDrawer: () => {},
+    handleHideDrawer: () => {},
+  };
+
   render() {
     const {
-      notifications = [],
-      displayDrawer = false,
+      notifications,
+      displayDrawer,
       handleDisplayDrawer,
+      handleHideDrawer,
       markNotificationAsRead,
     } = this.props;
-    const drawerContent = displayDrawer && (notifications.length > 0 ? (
+
+    const drawerContent = displayDrawer && (
       <div className={css(styles.notifications)}>
         <button
           style={{
@@ -23,7 +33,7 @@ class Notifications extends Component {
             cursor: "pointer",
           }}
           aria-label="Close"
-          onClick={this.props.handleHideDrawer}
+          onClick={handleHideDrawer}
         >
           <img
             src={closeButton}
@@ -31,33 +41,33 @@ class Notifications extends Component {
             style={{ width: "15px", height: "15px" }}
           />
         </button>
-        <p>Here is the list of notifications</p>
-        <ul>
-          {notifications.map((n) => (
-            <NotificationItem
-              key={n.id}
-              id={n.id}
-              type={n.type}
-              value={n.value}
-              html={n.html}
-              markAsRead={markNotificationAsRead}
-            />
-          ))}
-        </ul>
+
+        {notifications.length > 0 ? (
+          <>
+            <p>Here is the list of notifications</p>
+            <ul>
+              {notifications.map((n) => (
+                <NotificationItem
+                  key={n.id}
+                  id={n.id}
+                  type={n.type}
+                  value={n.value}
+                  html={n.html}
+                  markAsRead={markNotificationAsRead}
+                />
+              ))}
+            </ul>
+          </>
+        ) : (
+          <p>No new notification for now</p>
+        )}
       </div>
-    ) : (
-      <div className={css(styles.notifications)}>
-        <p>No new notification for now</p>
-      </div>
-    ));
+    );
 
     return (
       <div className={css(styles.rootNotifications)}>
         <div className={css(styles.notificationContainer)}>
-          <div
-            className={css(styles.title)}
-            onClick={handleDisplayDrawer}
-          >
+          <div className={css(styles.title)} onClick={handleDisplayDrawer}>
             Your notifications
           </div>
           {drawerContent}
@@ -96,7 +106,6 @@ const styles = StyleSheet.create({
       backgroundColor: "white",
       zIndex: 9999,
     },
-
     'li[data-priority="default"]': {
       color: "blue",
     },

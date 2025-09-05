@@ -1,23 +1,32 @@
-import { newContext } from "../Context/context";
 import React, { useContext } from "react";
-
 import { getCurrentYear, getFooterCopy } from "../utils/utils";
+import { newContext } from "../Context/context";
 
-const Footer = () => {
-  const { user } = useContext(newContext);
+function Footer() {
+  const { user, logOut } = useContext(newContext);
 
   return (
-    <div className="App-footer">
+    <footer className="App-footer">
       <p>
-        Copyright {getCurrentYear()} - {getFooterCopy(false)}
+        Copyright {getCurrentYear()} {getFooterCopy()}
       </p>
-      {user.isLoggedIn && (
+      {user?.isLoggedIn && (
         <p>
-          <a href="#contact">Contact us</a>
+          Welcome <strong>{user.email}</strong>{" "}
+          (<a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              logOut();
+            }}
+            aria-label="Logout link"
+          >
+            logout
+          </a>)
         </p>
       )}
-    </div>
+    </footer>
   );
-};
+}
 
 export default Footer;

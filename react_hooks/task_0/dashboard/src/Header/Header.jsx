@@ -19,7 +19,7 @@ const Header = () => {
             {user && user.isLoggedIn && (
                 <section id="logoutSection" className={css(styles.logOutSection)}>
                     <p>
-                        Welcome <b>{user.email}</b>
+                        Welcome <b>{user.email}</b>&nbsp;
                         <a
                             href="#logout"
                             onClick={(e) => {

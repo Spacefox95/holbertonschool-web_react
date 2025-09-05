@@ -16,10 +16,10 @@ const Header = () => {
                 />
                 <h1 className={css(styles.title)}>School Dashboard</h1>
             </header>
-            {user.isLoggedIn && (
+            {user && user.isLoggedIn && (
                 <section id="logoutSection" className={css(styles.logOutSection)}>
                     <p>
-                        Welcome {user.email}{" "}
+                        Welcome <b>{user.email}</b>
                         <a
                             href="#logout"
                             onClick={(e) => {

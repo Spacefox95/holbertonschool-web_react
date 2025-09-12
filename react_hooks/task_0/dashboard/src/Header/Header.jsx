@@ -7,33 +7,32 @@ const Header = () => {
     const { user, logOut } = useContext(newContext)
 
     return (
-        <>
-            <header className={css(styles.header)}>
-                <img
-                    className={css(styles.logo)}
-                    src={holbertonLogo}
-                    alt="holberton logo"
-                />
-                <h1 className={css(styles.title)}>School Dashboard</h1>
+        <div className={css(styles.header)}>
+            <img
+                className={css(styles.logo)}
+                src={holbertonLogo}
+                alt="holberton logo"
+            />
+            <h1 className={css(styles.title)}>School Dashboard</h1>
 
-                {user && user.isLoggedIn && (
-                    <section id="logoutSection" className={css(styles.logOutSection)}>
-                        <p>
-                            Welcome <b>{user.email}</b>&nbsp;
-                            <a
-                                href="#logout"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    logOut();
-                                }}
-                            >
-                                (logout)
-                            </a>
-                        </p>
-                    </section>
-                )}
-            </header>
-        </>
+            {user && user.isLoggedIn && (
+                <section id="logoutSection" className={css(styles.logOutSection)}>
+                    <p>
+                        Welcome <b>{user.email}</b>&nbsp;
+                        <a
+                            href="#logout"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                logOut();
+                            }}
+                        >
+                            (logout)
+                        </a>
+                    </p>
+                </section>
+            )}
+        </div>
+
     );
 };
 const styles = StyleSheet.create({

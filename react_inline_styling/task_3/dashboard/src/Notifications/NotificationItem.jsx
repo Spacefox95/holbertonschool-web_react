@@ -85,6 +85,13 @@ class NotificationItem extends PureComponent {
 const style = StyleSheet.create({
   t: {
     border: "none",
+    '@media (max-width: 900px)': {
+      width: "100%",
+      height: "100%",
+      padding: '10px 8px',
+      border: 'solid black 1px',
+      fontSize: "20px",
+    },
   },
 });
 

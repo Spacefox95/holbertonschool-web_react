@@ -1,4 +1,4 @@
-import CourseListRow from './CourseListRow';
+import CourseListRow from './CourseListRow/CourseListRow';
 import { StyleSheet, css} from 'aphrodite';
 
 

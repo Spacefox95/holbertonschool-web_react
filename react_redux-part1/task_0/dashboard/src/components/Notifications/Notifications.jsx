@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { StyleSheet, css } from "aphrodite";
-import NotificationItem from "./NotificationItem";
-import closeButton from "../assets/close-button.png";
+import NotificationItem from "../NotificationItem/NotificationItem";
+import closeButton from "../../assets/close-icon.png";
 
 class Notifications extends PureComponent {
   static defaultProps = {

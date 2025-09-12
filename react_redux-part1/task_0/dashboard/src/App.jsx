@@ -1,13 +1,13 @@
 import React, { Component, createContext } from "react";
-import Notifications from "../Notifications/Notifications";
-import Header from "../Header/Header";
-import Login from "../Login/Login";
-import Footer from "../Footer/Footer";
-import CourseList from "../CourseList/CourseList";
-import BodySection from "../BodySection/BodySection";
-import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
-import WithLogging from "../HOC/WithLogging";
-import { getLatestNotification } from "../utils/utils";
+import Notifications from "./components/Notifications/Notifications";
+import Header from "./components/Header/Header";
+import Login from "./pages/Login/Login";
+import Footer from "./components/Footer/Footer";
+import CourseList from "./pages/CourseList/CourseList";
+import BodySection from "./components/BodySection/BodySection";
+import BodySectionWithMarginBottom from "./components/BodySectionWithMarginBottom/BodySectionWithMarginBottom";
+import WithLogging from "./components/HOC/WithLogging";
+import { getLatestNotification } from "./utils/utils";
 import { StyleSheet, css } from "aphrodite";
 // eslint-disable-next-line no-unused-vars
 const LoginWithLogging = WithLogging(Login);
@@ -19,7 +19,7 @@ const defaultUser = {
   isLoggedIn: false,
 };
 
-const defaultLogOut = () => {};
+const defaultLogOut = () => { };
 
 const newContext = createContext({
   user: defaultUser,

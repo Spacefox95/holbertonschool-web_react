@@ -1,7 +1,7 @@
-import holbertonLogo from '../assets/holberton-logo.jpg'
+import holbertonLogo from '../../assets/holberton-logo.jpg'
 import { StyleSheet, css } from 'aphrodite';
 import React, { Component } from "react";
-import { newContext } from "../Context/context";
+import { newContext } from "../../../../dashboard/context";
 
 class Header extends Component {
     static contextType = newContext;

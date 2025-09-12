@@ -1,32 +1,59 @@
-import React, { useContext } from "react";
-import { getCurrentYear, getFooterCopy } from "../utils/utils";
-import { newContext } from "../Context/context";
+import React, { useContext } from 'react';
+import { getCurrentYear, getFooterCopy } from '../utils/utils';
+import { newContext } from '../Context/context';
+import { StyleSheet, css } from 'aphrodite';
+
 
 function Footer() {
-  const { user, logOut } = useContext(newContext);
+  const context = useContext(newContext);
+  const { user, logOut } = context || {};
+
+  const shouldShowContact = user && user.isLoggedIn === true;
+
+  const handleLogoutClick = (event) => {
+    if (event && event.preventDefault) {
+      event.preventDefault();
+    }
+    if (typeof logOut == 'function') {
+      logOut()
+    }
+  }
 
   return (
-    <footer className="App-footer">
-      <p>
-        Copyright {getCurrentYear()} {getFooterCopy()}
-      </p>
-      {user?.isLoggedIn && (
-        <p>
-          Welcome <strong>{user.email}</strong>{" "}
-          (<a
+    <footer className='App-footer'>
+      <p>Copyright {getCurrentYear()} {getFooterCopy()}</p>
+      {shouldShowContact && (<>
+        <section id="logoutSection" className={css(styles.logoutSection)}>
+          Welcome <b>{user.email}</b>
+          <a
             href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              logOut();
-            }}
-            aria-label="Logout link"
+            className={css(styles.logoutLink)}
+            onClick={handleLogoutClick}
           >
-            logout
-          </a>)
+            (logout)
+          </a>
+        </section>
+        <p>
+          <a href="#" aria-label="Contact us link">Contact us</a>
         </p>
+      </>
       )}
     </footer>
   );
 }
+
+
+const styles = StyleSheet.create({
+
+  logoutSection: {
+    marginTop: '0.75rem',
+    fontFamily:
+      "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+  },
+  logoutLink: {
+    marginLeft: '0.25rem',
+    cursor: 'pointer',
+  },
+});
 
 export default Footer;

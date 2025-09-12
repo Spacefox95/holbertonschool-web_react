@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { StyleSheet, css } from 'aphrodite';
-
 import HolbertonLogo from '../assets/holberton-logo.jpg';
 import { newContext } from '../Context/context';
 

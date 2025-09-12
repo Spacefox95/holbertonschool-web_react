@@ -13,7 +13,7 @@ const Header = () => {
                 src={holbertonLogo}
                 alt="holberton logo"
             />
-            <h1 className={css(styles.title)}>School Dashboard</h1>
+            <h1 className={css(styles.title)}>school Dashboard</h1>
 
             {user && user.isLoggedIn && (
                 <section id="logoutSection" className={css(styles.logOutSection)}>

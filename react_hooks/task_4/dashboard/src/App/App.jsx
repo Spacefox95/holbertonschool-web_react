@@ -3,6 +3,8 @@ import { StyleSheet, css } from "aphrodite";
 import Notifications from "../Notifications/Notifications";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
+import axios from "axios";
+
 import Footer from "../Footer/Footer";
 import CourseList from "../CourseList/CourseList";
 import BodySection from "../BodySection/BodySection";
@@ -10,6 +12,7 @@ import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBot
 import WithLogging from "../HOC/WithLogging";
 import { getLatestNotification } from "../utils/utils";
 import { newContext, defaultUser } from "../Context/context";
+import { useEffect } from "react";
 
 const LoginWithLogging = WithLogging(Login);
 const CourseListWithLogging = WithLogging(CourseList);
@@ -57,23 +60,52 @@ const styles = StyleSheet.create({
   },
 });
 
-const notificationsList = [
-  { id: 1, type: "default", value: "New course available" },
-  { id: 2, type: "urgent", value: "New resume available" },
-  { id: 3, type: "urgent", html: { __html: getLatestNotification() } },
-];
-
-const coursesList = [
-  { id: 1, name: "ES6", credit: 60 },
-  { id: 2, name: "Webpack", credit: 20 },
-  { id: 3, name: "React", credit: 40 },
-];
-
 const App = () => {
   const [displayDrawer, setDisplayDrawer] = useState(true);
   const [user, setUser] = useState({ ...defaultUser });
-  const [notifications, setNotifications] = useState(notificationsList);
-  const [courses] = useState(coursesList);
+  const [notifications, setNotifications] = useState([]);
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await axios.get(
+          `/holbertonschool-web_react/notifications.json`
+        );
+        const data = response.data || [];
+        const updated = data.map((item) =>
+          item.html?.__html === "LATEST"
+            ? { ...item, html: { __html: getLatestNotification() } }
+            : item
+        );
+        setNotifications(updated);
+      } catch (error) {
+        console.error("Failed to fecth notifications:", error);
+      }
+    };
+    fetchNotifications();
+  }, []);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        if (user.isLoggedIn) {
+          const response = await axios.get(
+            `/holbertonschool-web_react/courses.json`
+          );
+          const data = Array.isArray(response.data)
+            ? response.data
+            : response.data.courses || [];
+          setCourses(data);
+        } else {
+          setCourses([]);
+        }
+      } catch (error) {
+        console.error("Failed to fetch courses:", error);
+      }
+    };
+    fetchCourses();
+  }, [user]);
 
   const logIn = useCallback((email, password) => {
     const newUser = {

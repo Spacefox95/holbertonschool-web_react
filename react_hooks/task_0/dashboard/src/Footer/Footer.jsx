@@ -20,7 +20,7 @@ function Footer() {
   }
 
   return (
-    <footer className='App-footer'>
+    <footer className={css(styles.AppFooter)}>
       <p>Copyright {getCurrentYear()} {getFooterCopy()}</p>
       {shouldShowContact && (<>
         <section id="logoutSection" className={css(styles.logoutSection)}>
@@ -44,7 +44,11 @@ function Footer() {
 
 
 const styles = StyleSheet.create({
-
+  AppFooter: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
   logoutSection: {
     marginTop: '0.75rem',
     fontFamily:

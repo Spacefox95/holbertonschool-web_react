@@ -5,16 +5,16 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: props.email || "",
-      password: props.password || "",
+      email: "",
+      password: "",
       enableSubmit: false,
     };
   }
 
   handleLoginSubmit = (event) => {
     event.preventDefault();
-    const { email, password } = this.state;
-    this.props.logIn(email, password);
+    const { email, password, logIn } = this.props;
+    logIn(email, password);
   };
 
   handleChangeEmail = (event) => {
@@ -35,7 +35,7 @@ class Login extends Component {
   };
 
   render() {
-    const { email, password, enableSubmit } = this.state;
+    const { email, password, enableSubmit} = this.state;
 
     return (
       <div className={css(styles.body)}>

@@ -9,6 +9,7 @@ import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBot
 import WithLogging from "../HOC/WithLogging";
 import { getLatestNotification } from "../utils/utils";
 import { StyleSheet, css } from "aphrodite";
+// eslint-disable-next-line no-unused-vars
 import { newContext } from "../Context/context";
 
 const LoginWithLogging = WithLogging(Login);
@@ -27,11 +28,9 @@ class App extends Component {
     };
   }
 
-  // Show/Hide Notifications
   handleDisplayDrawer = () => this.setState({ displayDrawer: true });
   handleHideDrawer = () => this.setState({ displayDrawer: false });
 
-  // Key shortcut for logout
   handleKeyDown = (event) => {
     if (event.ctrlKey && event.key === "h") {
       alert("Logging you out");
@@ -47,7 +46,6 @@ class App extends Component {
     document.removeEventListener("keydown", this.handleKeyDown);
   }
 
-  // Login/Logout methods
   logIn = (email, password) => {
     this.setState({
       user: { email, password, isLoggedIn: true },

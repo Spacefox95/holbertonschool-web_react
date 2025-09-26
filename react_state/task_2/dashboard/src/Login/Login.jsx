@@ -1,20 +1,27 @@
-import { Component } from "react";
+import { Component, createRef } from "react";
 import { StyleSheet, css } from "aphrodite";
 
 class Login extends Component {
+  static defaultProps = {
+    email: "",
+    password: "",
+    logIn: () => {},
+  };
+
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
-      enableSubmit: false,
+      email: props.email || "",
+      password: props.password || "",
     };
+    this.emailRef = createRef();
+    this.passwordRef = createRef();
   }
 
   handleLoginSubmit = (event) => {
     event.preventDefault();
-    const { email, password, logIn } = this.props;
-    logIn(email, password);
+    if (typeof this.props.logIn === "function")
+      this.props.logIn(this.state.email, this.state.password);
   };
 
   handleChangeEmail = (event) => {
@@ -35,7 +42,7 @@ class Login extends Component {
   };
 
   render() {
-    const { email, password, enableSubmit} = this.state;
+    const { email, password, enableSubmit } = this.state;
 
     return (
       <div className={css(styles.body)}>

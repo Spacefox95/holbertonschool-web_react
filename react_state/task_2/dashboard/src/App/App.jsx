@@ -18,13 +18,23 @@ const CourseListWithLogging = WithLogging(CourseList);
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.logIn = this.logIn.bind(this);
+    this.logOut = this.logOut.bind(this);
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+
     this.state = {
       displayDrawer: false,
       user: {
-        email: "",
-        password: "",
-        isLoggedIn: false,
+        ...newContext.defaultUser
       },
+      logOut: this.logOut,
+      contextValue: {
+        user: { ...newContext.defaultUser },
+        logOut: this.logOut
+      }
     };
   }
 
@@ -47,14 +57,20 @@ class App extends Component {
   }
 
   logIn = (email, password) => {
+    const user = {
+      email: email || '',
+      password: password || '',
+      isLoggedIn: true
+    };
     this.setState({
-      user: { email, password, isLoggedIn: true },
+      user, contextValue: { user, logOut: this.logOut}
     });
   };
 
   logOut = () => {
+    const user = { ...newContext.defaultUser}
     this.setState({
-      user: { email: "", password: "", isLoggedIn: false },
+      user, defaultValue: { user, logOut: this.logOut}
     });
   };
 
